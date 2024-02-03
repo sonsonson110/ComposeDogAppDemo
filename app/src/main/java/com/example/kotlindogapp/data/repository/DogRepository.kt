@@ -1,5 +1,6 @@
 package com.example.kotlindogapp.data.repository
 
+import com.example.kotlindogapp.common.network.ApiState
 import com.example.kotlindogapp.data.api.DogApiService
 import com.example.kotlindogapp.data.model.DogApiModel
 import dagger.Binds
@@ -13,7 +14,8 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface DogRepository {
-    fun getDogList(): Flow<List<DogApiModel>>
+    fun getDogList(): Flow<ApiState>
+    fun getDogById(dogId: String): Flow<ApiState>
 }
 
 class DogRepositoryImpl @Inject constructor(
@@ -21,7 +23,23 @@ class DogRepositoryImpl @Inject constructor(
 ): DogRepository {
 
     override fun getDogList() = flow {
-        val response = dogApiService.getDogList()
-        emit(response)
+        try {
+            val response = dogApiService.getDogList()
+            if (response.isEmpty())
+                emit(ApiState.Empty)
+            else
+                emit(ApiState.Success(data = response))
+        } catch (e: Exception) {
+            emit(ApiState.Failure(e = e))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    override fun getDogById(dogId: String): Flow<ApiState> = flow {
+        try {
+            val response = dogApiService.getDogById(dogId)
+            emit(ApiState.Success(data = response))
+        } catch (e: Exception) {
+            emit(ApiState.Failure(e = e))
+        }
     }.flowOn(Dispatchers.IO)
 }
