@@ -1,18 +1,18 @@
-package com.example.kotlindogapp.data.model
+package com.example.kotlindogapp.data.remote
 
 import com.google.gson.annotations.SerializedName
 
 data class DogApiModel(
-    @SerializedName("breeds") var breeds: ArrayList<Breeds> = arrayListOf(),
+    @SerializedName("breeds") var breeds: ArrayList<BreedApiModel> = arrayListOf(),
     @SerializedName("id") var id: String? = null,
     @SerializedName("url") var url: String? = null,
     @SerializedName("width") var width: Int? = null,
     @SerializedName("height") var height: Int? = null
 )
 
-data class Breeds(
-    @SerializedName("weight") var weight: Weight? = Weight(),
-    @SerializedName("height") var height: Height? = Height(),
+data class BreedApiModel(
+    @SerializedName("weight") var weight: WeightApiModel? = WeightApiModel(),
+    @SerializedName("height") var height: HeightApiModel? = HeightApiModel(),
     @SerializedName("id") var id: Int? = null,
     @SerializedName("name") var name: String? = null,
     @SerializedName("bred_for") var bredFor: String? = null,
@@ -22,12 +22,12 @@ data class Breeds(
     @SerializedName("reference_image_id") var referenceImageId: String? = null
 )
 
-data class Height(
+data class HeightApiModel(
     @SerializedName("imperial") var imperial: String? = null,
     @SerializedName("metric") var metric: String? = null
 )
 
-data class Weight(
+data class WeightApiModel(
     @SerializedName("imperial") var imperial: String? = null,
     @SerializedName("metric") var metric: String? = null
 )

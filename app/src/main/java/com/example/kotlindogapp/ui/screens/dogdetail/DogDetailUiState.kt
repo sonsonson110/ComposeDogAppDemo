@@ -1,9 +1,9 @@
 package com.example.kotlindogapp.ui.screens.dogdetail
 
-import com.example.kotlindogapp.data.model.DogApiModel
+import com.example.kotlindogapp.model.Dog
 
 data class DogDetailUiState(
     val isLoading: Boolean = true,
     val error: Throwable? = null,
-    val dogDetail: DogApiModel = DogApiModel()
+    val dogDetail: Dog = Dog()
 )

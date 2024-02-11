@@ -1,9 +1,7 @@
 package com.example.kotlindogapp.di
 
 import com.example.kotlindogapp.common.constant.BASE_URL
-import com.example.kotlindogapp.data.api.DogApiService
-import com.example.kotlindogapp.data.repository.DogRepository
-import com.example.kotlindogapp.data.repository.DogRepositoryImpl
+import com.example.kotlindogapp.data.remote.DogApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

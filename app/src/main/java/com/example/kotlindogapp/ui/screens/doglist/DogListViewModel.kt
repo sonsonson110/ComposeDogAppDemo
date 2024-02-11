@@ -3,12 +3,11 @@ package com.example.kotlindogapp.ui.screens.doglist
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kotlindogapp.common.network.ApiState
-import com.example.kotlindogapp.data.model.DogApiModel
 import com.example.kotlindogapp.data.repository.DogRepository
+import com.example.kotlindogapp.model.Dog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,12 +23,12 @@ class DogListViewModel @Inject constructor(private val repository: DogRepository
 
     private fun getDogList() = viewModelScope.launch {
         _dogListState.update { it.copy(isLoading = true) }
-        repository.getDogList()
+        repository.getRemoteDogList()
             .collect { apiState ->
                 when (apiState) {
                     is ApiState.Success<*> -> _dogListState.update {
                         it.copy(
-                            dogList = apiState.data as List<DogApiModel>,
+                            dogList = apiState.data as List<Dog>,
                         )
                     }
                     is ApiState.Failure -> _dogListState.update { it.copy(error = apiState.e) }

@@ -1,8 +1,6 @@
-package com.example.kotlindogapp.data.api
+package com.example.kotlindogapp.data.remote
 
 import com.example.kotlindogapp.common.constant.API_KEY
-import com.example.kotlindogapp.common.network.ApiState
-import com.example.kotlindogapp.data.model.DogApiModel
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
