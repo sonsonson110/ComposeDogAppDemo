@@ -1,7 +1,7 @@
 package com.example.kotlindogapp.model
 
-import com.example.kotlindogapp.data.local.entity.BreedEntity
-import com.example.kotlindogapp.data.local.entity.DogEntity
+import com.example.kotlindogapp.data.database.entity.BreedEntity
+import com.example.kotlindogapp.data.database.entity.DogEntity
 import com.example.kotlindogapp.data.remote.BreedApiModel
 import com.example.kotlindogapp.data.remote.DogApiModel
 import com.example.kotlindogapp.data.remote.HeightApiModel

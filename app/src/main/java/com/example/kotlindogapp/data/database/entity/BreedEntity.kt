@@ -1,4 +1,4 @@
-package com.example.kotlindogapp.data.local.entity
+package com.example.kotlindogapp.data.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

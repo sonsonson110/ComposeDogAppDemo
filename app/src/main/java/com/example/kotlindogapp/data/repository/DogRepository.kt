@@ -2,13 +2,13 @@ package com.example.kotlindogapp.data.repository
 
 import androidx.room.withTransaction
 import com.example.kotlindogapp.common.network.ApiState
-import com.example.kotlindogapp.data.local.AppDatabase
-import com.example.kotlindogapp.data.local.dao.BreedDao
-import com.example.kotlindogapp.data.local.dao.DogBreedDao
-import com.example.kotlindogapp.data.local.dao.DogDao
-import com.example.kotlindogapp.data.local.entity.BreedEntity
-import com.example.kotlindogapp.data.local.entity.DogBreedCrossRef
-import com.example.kotlindogapp.data.local.entity.DogEntity
+import com.example.kotlindogapp.data.database.AppDatabase
+import com.example.kotlindogapp.data.database.dao.BreedDao
+import com.example.kotlindogapp.data.database.dao.DogBreedDao
+import com.example.kotlindogapp.data.database.dao.DogDao
+import com.example.kotlindogapp.data.database.entity.BreedEntity
+import com.example.kotlindogapp.data.database.entity.DogBreedCrossRef
+import com.example.kotlindogapp.data.database.entity.DogEntity
 import com.example.kotlindogapp.data.remote.DogApiService
 import com.example.kotlindogapp.model.Breed
 import com.example.kotlindogapp.model.Dog
@@ -23,6 +23,7 @@ interface DogRepository {
     suspend fun getLocalDogList(): Flow<List<Dog>>
     suspend fun getRemoteDogList(): Flow<ApiState>
     suspend fun getRemoteDogById(dogId: String): Flow<ApiState>
+    suspend fun getRemoteRandomDog(): Flow<ApiState>
 }
 
 class DogRepositoryImpl @Inject constructor(
@@ -78,6 +79,16 @@ class DogRepositoryImpl @Inject constructor(
             val response = dogApiService.getDogById(dogId)
             emit(ApiState.Success(data = Dog.fromDogApiModel(response)))
         } catch (e: Exception) {
+            emit(ApiState.Failure(e = e))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun getRemoteRandomDog(): Flow<ApiState> = flow {
+        try{
+            val response = dogApiService.getRandomDog()
+            emit(ApiState.Success(data = Dog.fromDogApiModel(response[0])))
+        } catch (e: Exception) {
+//            println(e)
             emit(ApiState.Failure(e = e))
         }
     }.flowOn(Dispatchers.IO)

@@ -2,7 +2,7 @@ package com.example.kotlindogapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.kotlindogapp.data.local.AppDatabase
+import com.example.kotlindogapp.data.database.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

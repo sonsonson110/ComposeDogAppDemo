@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -32,7 +33,6 @@ import com.example.kotlindogapp.nav.Screen
 fun DogListScreen(
     viewModel: DogListViewModel = hiltViewModel(),
     navController: NavController,
-    modifier: Modifier = Modifier
 ) {
     // initialize data
     val uiState by viewModel.dogListState.collectAsState()
@@ -62,6 +62,13 @@ fun DogListTopBar(navController: NavController = rememberNavController(), modifi
                 modifier = Modifier
                     .padding(end = 8.dp)
                     .clickable { navigateToDogFavourite(navController) }
+            )
+            Icon(
+                Icons.Outlined.Settings,
+                contentDescription = "Setting",
+                modifier = Modifier
+                    .padding(end = 8.dp)
+                    .clickable { navController.navigate(route = Screen.Setting.route) }
             )
         }
     )

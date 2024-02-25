@@ -1,9 +1,9 @@
 package com.example.kotlindogapp.di
 
-import com.example.kotlindogapp.data.local.AppDatabase
-import com.example.kotlindogapp.data.local.dao.BreedDao
-import com.example.kotlindogapp.data.local.dao.DogBreedDao
-import com.example.kotlindogapp.data.local.dao.DogDao
+import com.example.kotlindogapp.data.database.AppDatabase
+import com.example.kotlindogapp.data.database.dao.BreedDao
+import com.example.kotlindogapp.data.database.dao.DogBreedDao
+import com.example.kotlindogapp.data.database.dao.DogDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
